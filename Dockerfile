@@ -6,9 +6,14 @@ ENV COOKIE_SECRET \
     CLIENT_SECRET \
     EMAIL_DOMAIN \ 
     UPSTREAM="http://localhost:8080" \
-    HTTP_ADDRESS="0.0.0.0:4180"
+    HTTP_ADDRESS="0.0.0.0:4180" \
+    HTTPS_ADDRESS="0.0.0.0:4181" \
+    REDIRECT_URL="http://localhost:8080/oauth/callback"
 
 COPY templates/bin/oauth2_proxy /usr/bin
 
+EXPOSE 4180 4181
+
 CMD oauth2_proxy -cookie-secret=${COOKIE_SECRET} -client-id=${CLIENT_ID} -client-secret=${CLIENT_SECRET} \
-    -email-domain=${EMAIL_DOMAIN} -upstream=${UPSTREAM} -http-address=${HTTP_ADDRESS}
+    -email-domain=${EMAIL_DOMAIN} -upstream=${UPSTREAM} -http-address=${HTTP_ADDRESS} \
+    -https-address=${HTTPS_ADDRESS} -redirec-url=${REDIRECT_URL}
