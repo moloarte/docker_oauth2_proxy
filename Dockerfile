@@ -3,6 +3,7 @@ LABEL MAINTAINER="Manuel O."
 
 ENV COOKIE_SECRET \
     COOKIE_NAME="_oauth2_proxy" \
+    COOKIE_DOMAIN \
     CLIENT_ID \
     CLIENT_SECRET \
     EMAIL_DOMAIN \ 
@@ -23,5 +24,5 @@ EXPOSE 4180 4181
 
 CMD oauth2_proxy -cookie-secret=${COOKIE_SECRET} -client-id=${CLIENT_ID} -client-secret=${CLIENT_SECRET} \
     -email-domain=${EMAIL_DOMAIN} -upstream=${UPSTREAM} -http-address=${HTTP_ADDRESS} \
-    -cookie-name=${COOKIE_NAME} -set-xauthrequest -redirect-url=${REDIRECT_URL} \
+    -cookie-name=${COOKIE_NAME}  -cookie-domain=${COOKIE_DOMAIN}  -set-xauthrequest -redirect-url=${REDIRECT_URL} \
     -cookie-secure=false
